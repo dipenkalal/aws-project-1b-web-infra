@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Update and install httpd
+sudo yum update -y
+sudo yum install -y httpd
+# Start and enable httpd service
+sudo systemctl start httpd
+sudo systemctl enable httpd
+# Set permissions for /var/www/html
+sudo chmod 777 -R /var/www/html
+# Create index.html with server hostname
+echo "<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Dipen's EC2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      padding-top: 15%;
+      margin: 0;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    a {
+      color: #ffd;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Webserver</h1>
+  <p>Welcome to Project1b Auto-Scaled Instance @ <strong>dipen.online</strong></p>
+  <p></p>
+</body>
+</html>
+" > /var/www/html/index.html
+sudo systemctl restart httpd
